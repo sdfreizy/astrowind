@@ -2,10 +2,57 @@
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { inputs, textarea, button = 'Odeslat', description = '' } = Astro.props;
 ---
 
-<form>
+<script>
+  // handle the form submission
+  var xhr = new XMLHttpRequest();
+
+  // only one contact form supported per page
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+
+  const handleFormSubmission = (event) => {
+    // prevent page from reloading
+    event.preventDefault();
+
+    // get form data
+    const formData = new FormData(form);
+
+    // create POST request to the form action attribute
+    xhr.open('POST', form.action, true);
+
+    // make sure we receive json back
+    xhr.setRequestHeader('Accept', 'application/json');
+
+    // SEND IT!
+    xhr.send(formData);
+
+    // once we get a response...
+    xhr.onload = function () {
+      const response = JSON.parse(xhr.response);
+
+      if (xhr.status === 200) {
+        // The request was successful
+        console.log('Form submitted successfully.');
+        // reset form on successful email send
+        form?.reset();
+      } else {
+        const message = 'Form submission failed with error: ' + response.error;
+        console.log(message);
+      }
+    };
+  };
+
+  form?.addEventListener('submit', handleFormSubmission, true);
+</script>
+
+<form
+  action="https://usebasin.com/f/724dd9a08d1c"
+  method="POST"
+  id="contact-form"
+  name="contact form"
+>
   {
     inputs &&
       inputs.map(
@@ -13,7 +60,10 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name && (
             <div class="mb-6">
               {label && (
-                <label for={name} class="block text-sm font-medium">
+                <label
+                  for={name}
+                  class="block text-sm font-medium"
+                >
                   {label}
                 </label>
               )}
@@ -23,17 +73,33 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
                 id={name}
                 autocomplete={autocomplete}
                 placeholder={placeholder}
-                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+                class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#192331]"
               />
             </div>
           )
       )
   }
+  <!-- honeypot field to catch bots. Purposefully mispelled "email" as "emai" to better trick bots -->
+  <label
+    for="emai"
+    class="sr-only"
+    >Real users skip this field</label
+  >
+  <input
+    id="emai"
+    type="text"
+    name="emai"
+    class="sr-only"
+    tabindex="-1"
+  />
 
   {
     textarea && (
       <div>
-        <label for="textarea" class="block text-sm font-medium">
+        <label
+          for="textarea"
+          class="block text-sm font-medium"
+        >
           {textarea.label}
         </label>
         <textarea
@@ -41,28 +107,8 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
-          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+          class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#192331]"
         />
-      </div>
-    )
-  }
-
-  {
-    disclaimer && (
-      <div class="mt-3 flex items-start">
-        <div class="flex mt-0.5">
-          <input
-            id="disclaimer"
-            name="disclaimer"
-            type="checkbox"
-            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
-          />
-        </div>
-        <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
-            {disclaimer.label}
-          </label>
-        </div>
       </div>
     )
   }
@@ -70,7 +116,10 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
   {
     button && (
       <div class="mt-10 grid">
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+        >
           {button}
         </Button>
       </div>
@@ -85,3 +134,107 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 </form>
+
+<!-- message send success feedback -->
+<dialog
+  id="form-good-feedback"
+  class="invisible fixed bottom-4 z-10 mx-auto flex rounded-lg bg-green-200 p-0 text-green-800 opacity-0 transition duration-300"
+>
+  <div class="p-4 text-center">
+    <p>Formulář byl odeslán</p>
+  </div>
+</dialog>
+
+<!-- message send fail feedback -->
+<dialog
+  id="form-bad-feedback"
+  class="invisible fixed bottom-4 z-10 mx-auto flex rounded-lg bg-red-200 p-0 text-red-800 opacity-0 transition duration-300"
+>
+  <div class="p-4 text-center">
+    <p>Došlo k chybě. Opakujte akci znovu.</p>
+  </div>
+</dialog>
+
+<style>
+  .form__input {
+    @apply w-full rounded-md border border-transparent bg-gray-200 p-2.5 transition;
+    @apply focus-visible:border-blue-600/70 focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-opacity-50;
+  }
+</style>
+
+<script>
+  // handle the form submission
+  var xhr = new XMLHttpRequest();
+
+  // only one contact form supported per page
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const formLoadingIndicator = document.getElementById('form-loading');
+  const formGoodFeedback = document.getElementById('form-good-feedback');
+  const formBadFeedback = document.getElementById('form-bad-feedback');
+
+  const handleFormSubmission = (event) => {
+    // prevent page from reloading
+    event.preventDefault();
+
+    // show loading indicator
+    formLoadingIndicator?.classList.remove('hidden');
+
+    // get form data
+    const formData = new FormData(form);
+
+    // create POST request to the form action attribute
+    xhr.open('POST', form.action, true);
+
+    // make sure we receive json back
+    xhr.setRequestHeader('Accept', 'application/json');
+
+    // SEND IT!
+    xhr.send(formData);
+
+    // once we get a response...
+    xhr.onload = function () {
+      formLoadingIndicator?.classList.add('hidden');
+      const response = JSON.parse(xhr.response);
+
+      if (xhr.status === 200) {
+        // The request was successful
+        console.log('Form submitted successfully.');
+        // reset form on successful email send
+        form?.reset();
+
+        if (formGoodFeedback) {
+          formGoodFeedback.classList.remove('invisible');
+          formGoodFeedback.classList.add('opacity-100');
+
+          // reset form feedback after a few seconds
+          setTimeout(() => {
+            formGoodFeedback.classList.remove('opacity-100');
+
+            setTimeout(() => {
+              formGoodFeedback.classList.add('invisible');
+            }, 300);
+          }, 5000);
+        }
+      } else {
+        const message = 'Form submission failed with error: ' + response.error;
+        console.log(message);
+        // The request failed
+        if (formBadFeedback) {
+          formBadFeedback.classList.remove('invisible');
+          formBadFeedback.classList.add('opacity-100');
+
+          // reset form feedback after a few seconds
+          setTimeout(() => {
+            formBadFeedback.classList.remove('opacity-100');
+
+            setTimeout(() => {
+              formBadFeedback.classList.add('invisible');
+            }, 300);
+          }, 7000);
+        }
+      }
+    };
+  };
+
+  form?.addEventListener('submit', handleFormSubmission, true);
+</script>

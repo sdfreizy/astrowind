@@ -1,6 +1,6 @@
 site:
-  name: AstroWind
-  site: 'https://astrowind.vercel.app'
+  name: 1409
+  site: 'https://www.1409.cz'
   base: '/'
   trailingSlash: false
 
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: AstroWind
-    template: '%s — AstroWind'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    default: 1409
+    template: '%s — 1409'
+  description: 'Svatba Marie &amp; Radek 14. 9. 2024.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: 1409
     images:
       - url: '~/assets/images/default.png'
         width: 1200
@@ -28,7 +28,7 @@ metadata:
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: cs
   textDirection: ltr
 
 apps:
