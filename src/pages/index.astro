@@ -28,12 +28,14 @@ const metadata = {
         text: 'Harmonogram',
         href: '#features',
       },
-      { text: 'Výběr jídla', href: '/vyber-jidla' },
+      { text: 'Otázky a odpovědi', href: '#faqs' },
     ]}
+    image={{ src: '~/assets/images/rmlogo.svg', alt: 'Logo' }}
+    tagline="Marie Šenovská & Radek Šiška"
   >
-    <Fragment slot="title"> Zveme vás na naši svatbu 14. 9. 2024, zámek Holešov </Fragment>
+    <Fragment slot="title"> Zveme vás na naši svatbu </Fragment>
 
-    <Fragment slot="subtitle"> Zde se dozvíte všechny informace ke svatebnímu dni. </Fragment>
+    <Fragment slot="subtitle"> 14. 9. 2024, zámek Holešov</Fragment>
   </Hero>
 
   <!-- Features Widget *************** -->
@@ -46,11 +48,11 @@ const metadata = {
     items={[
       {
         title: '10:30 Příjezd hostů',
-        description: 'Dostavte se včas na zámek v Holešově.',
+        description: 'Svatební den začíná na zámku v Holešově.',
         icon: 'tabler:map-pin',
       },
       {
-        title: '11:00 Obřad',
+        title: '11:00 Obřad v Sala Terrena',
         description: 'V 11:00 začíná svatební obřad.',
         icon: 'tabler:ball-bowling',
       },
@@ -60,19 +62,24 @@ const metadata = {
         icon: 'tabler:camera',
       },
       {
-        title: '12:30 Přesun, Resort Rusava',
+        title: '12:30 Přemístění na Resort Rusava',
         description: 'Přesouváme se na Resort Rusava, kde bude probíhat zbytek svatebního dne.',
         icon: 'tabler:car',
       },
       {
-        title: '13:30 Hostina',
+        title: '13:00 Vítání před hotelem',
+        description: 'Svatební tradice.',
+        icon: 'tabler:glass-cocktail',
+      },
+      {
+        title: '13:30 Zahájení svatební hostiny',
         description:
-          'Pochutnáte si na svatebním obědě. Servírovat budeme vepřovou panenku nebo kuřecí steak s grenaille, pepřovou nebo houbovou omáčkou.',
+          'Pochutnáte si na svatebním obědě. Servírovat se bude vepřová panenka nebo kuřecí steak s grenaille, pepřovou či houbovou omáčkou.',
         icon: 'tabler:tools-kitchen-2',
       },
       {
-        title: '15:00 Krájení dortu',
-        description: 'Rozkrojíme svatební dort, objednat si k němu můžete třeba kávu.',
+        title: '17:00 Krájení dortu',
+        description: 'Rozkrojíme svatební dort dát si k němu můžete třeba kávu.',
         icon: 'tabler:cake',
       },
       {
@@ -81,7 +88,12 @@ const metadata = {
         icon: 'tabler:meat',
       },
       {
-        title: '21:00 Party',
+        title: '20:00 Focení s prskavkami',
+        description: 'Krátké focení po setmění.',
+        icon: 'tabler:camera',
+      },
+      {
+        title: '21:00 Večerní zábava',
         description: 'Na tanečním parketu vás uvítá DJ René Jančík.',
         icon: 'tabler:confetti',
       },
@@ -98,29 +110,31 @@ const metadata = {
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'Je zajištění přesun hostů z Holešova na Rusavu?',
-        description: 'Hromadný transport zajištění není.',
-      },
-      {
-        title: 'Jaký je dress code?',
-        description: 'Formální oblečení. Vyhněte se červené barvě, která znamená, že svatebčanům nepřejete.',
-      },
-      {
-        title: 'Bude na svatbě střelba z luku?',
-        description: 'Ano, bude. Těšit se na ni můžete odpoledne.',
-      },
-      {
-        title: 'Mohu se těšit na slivovici a jiný alkohol?',
+        title: 'Kde a kdy se svatba koná?',
         description:
-          'Ano můžete. Na baru v restauraci si můžete objednat jakýkoliv alkoholický či nealkoholický nápoj. K dispozici bude také domácí slivovice.',
+          'Start: nám. F. X. Richtra 190, 76901 Holešov<br>Kdy: 10:30 příjezd, 11:00 obřad<br>Přesun na hotel: Resort Rusava, Rusava 334, 76841 Rusava',
       },
       {
-        title: 'Jsou na svatbě povoleni psi?',
-        description: 'Nejsou.',
+        title: 'Kde je možné zaparkovat?',
+        description:
+          'Parkování je možné naproti zámku případně v ulici podél zámku. Při přesunu na Resort Rusava je možné parkování přímo před hotelem.',
+      },
+      {
+        title: 'Jak je to s dopravou?',
+        description:
+          'Je zajištěný večerní odvoz z Rusavy. Příjezd do Holešova a přesun na Rusavu si každý zajišťuje sám.',
+      },
+      {
+        title: 'Jaký je dress-code?',
+        description: 'Formální oblečení. Aktuální převověď počasí hlásí nižší teploty kolem 17°C a déšť.',
+      },
+      {
+        title: 'Budou na svatbě nějaké speciální aktivity?',
+        description: 'Ano, dozvíte se o nich ve svatebních novinách na místě.',
       },
       {
         title: 'Bude k dispozici fotokoutek?',
-        description: 'Ano bude, ale pozor, ať nepraskne objektiv.',
+        description: 'Ano, můžete se vyfotit s různými rekvizitami.',
       },
     ]}
   />

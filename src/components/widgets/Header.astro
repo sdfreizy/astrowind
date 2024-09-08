@@ -73,7 +73,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     ]}
   >
     <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={getHomePermalink()}>
+      <a
+        class="flex items-center"
+        href={getHomePermalink()}
+      >
         <Logo />
       </a>
       <div class="flex items-center md:hidden">
@@ -92,9 +95,15 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             <li class={links?.length ? 'dropdown' : ''}>
               {links?.length ? (
                 <>
-                  <button type="button" class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center">
+                  <button
+                    type="button"
+                    class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center text-nowrap"
+                  >
                     {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    <Icon
+                      name="tabler:chevron-down"
+                      class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
+                    />
                   </button>
                   <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
                     {links.map(({ text: text2, href: href2 }) => (
@@ -115,7 +124,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center',
+                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center text-nowrap',
                     { 'aw-link-active': href === currentPath },
                   ]}
                   href={href}
@@ -144,7 +153,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 aria-label="RSS Feed"
                 href={getAsset('/rss.xml')}
               >
-                <Icon name="tabler:rss" class="w-5 h-5" />
+                <Icon
+                  name="tabler:rss"
+                  class="w-5 h-5"
+                />
               </a>
             )
           }
@@ -153,7 +165,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           actions?.length ? (
             <span class="ml-4 rtl:ml-0 rtl:mr-4">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                <Button
+                  {...btnProps}
+                  class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto"
+                />
               ))}
             </span>
           ) : (

@@ -2,6 +2,8 @@
 import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import Image from '~/components/common/Image.astro';
+import logo from '~/assets/images/sdlogo.svg';
 
 interface Link {
   text?: string;
@@ -36,11 +38,16 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     <div class="flex flex-col gap-4 items-center py-6 md:py-8">
       <div class="text-sm mr-4 dark:text-muted text-center">
         <a href="https://www.servis-design.cz/">
-          <img
-            class="h-6 xl:h-10"
-            src="https://www.servis-design.cz/logo.svg"
-            alt="onWidget logo"
+          <Image
+            src={logo}
+            class="h-6 lg:h-10"
+            widths={[95, 197]}
+            width={197}
+            sizes="(max-width: 1023px) 24px, 40px"
+            alt={SITE?.name}
+            aspectRatio="4:1"
             loading="lazy"
+            decoding="async"
           />
         </a>
       </div>

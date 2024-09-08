@@ -4,6 +4,10 @@ import typographyPlugin from '@tailwindcss/typography';
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
+    fontFamily: {
+      sans: ['Montserrat', 'sans-serif'],
+      serif: ['Baskervville', 'serif'],
+    },
     extend: {
       colors: {
         primary: 'var(--aw-color-primary)',
